@@ -20,6 +20,13 @@ linux () {
   ln -fs Linux/Makefile Makefile
 }
 
+macosx () {
+  ln -fs MacOSX/Makefile Makefile
+  echo "NOTE: You have to define the openssl directory like below before you "
+  echo "      launch make."
+  echo "          OPENSSL=/usr/local/Cellar/openssl/1.0.2h_1 make"
+  echo "      Otherwise it supposes the directory is /usr/local/openssl"
+}
 
 ##### MAIN #####
 
@@ -37,6 +44,10 @@ elif [ x"$OS" = "xAIX" ]
 then
   echo "Configuring for $OS..."
   aix
+elif [ x"$OS" = "xDarwin" ]
+then
+  echo "Configuring for MacOSX..."
+  macosx
 else
   echo "OS $OS not supported, aborting..." 1&>2
   exit 1
